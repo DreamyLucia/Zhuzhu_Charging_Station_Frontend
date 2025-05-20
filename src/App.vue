@@ -14,7 +14,7 @@ const { theme } = useTheme()
       <!-- 页面内容会通过 RouterView 动态渲染 -->
       <router-view v-slot="{ Component }">
         <keep-alive>
-          <component :is="Component" />
+          <component :is="Component" />sss
         </keep-alive>
       </router-view>
     </div>

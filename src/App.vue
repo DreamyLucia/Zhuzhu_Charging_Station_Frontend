@@ -13,9 +13,7 @@ const { theme } = useTheme()
     <div class="app h-screen w-screen no-select">
       <!-- 页面内容会通过 RouterView 动态渲染 -->
       <router-view v-slot="{ Component }">
-        <keep-alive>
-          <component :is="Component" />
-        </keep-alive>
+        <component :is="Component" />
       </router-view>
     </div>
   </a-config-provider>

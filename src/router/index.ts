@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import introduceRouters from './introduce';
-import mainAppRouters from './main-app';
+import authRoutes from './auth';
 
 const publicPath = import.meta.env.VITE_PUBLIC_BASE || '/';
 
@@ -13,7 +13,7 @@ const router = createRouter({
       component: () => import('@/views/Dashboard/index.vue'),
     },
     ...introduceRouters,
-    ...mainAppRouters,
+    ...authRoutes,
   ],
 });
 

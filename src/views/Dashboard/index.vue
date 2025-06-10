@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import Siderbar from './components/Siderbar.vue'
-import Select from './components/Select.vue'
+import DashboradLayout from '@/layouts/DashboardLayout/index.vue'
 </script>
 
 <template>
-  <div class="flex h-full w-full normal-bg px-8 py-4">
-    <Siderbar />
-    <Select />
-  </div>
+  <DashboradLayout>
+    <div />
+  </DashboradLayout>
 </template>
 
 <style lang="scss">

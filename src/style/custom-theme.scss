@@ -63,8 +63,23 @@
   border-bottom: solid 1px var(--normal-layout-border-color);
 }
 
+.border-right {
+  transition: all 0.2s ease;
+  border-right: solid 1px var(--normal-layout-border-color);
+}
+
 .primary {
+  transition: all 0.2s ease;
   color: var(--primary);
+}
+
+.underline-link {
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .normal-content {
@@ -133,6 +148,19 @@
   text-overflow: ellipsis;
 }
 
+.primary-button {
+  background-color: var(--primary);
+  transition: all 0.2s ease;
+  border-radius: 10px;
+  border: none;
+  color: var(--normal-layout-text-color);
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
 .normal-button {
   background-color: var(--normal-layout-body-bg-invert-color);
   transition: all 0.2s ease;
@@ -144,5 +172,19 @@
   &:hover {
     background-color: var(--normal-layout-screen-bg-color);
     color: var(--normal-layout-text-color);
+  }
+}
+
+.secondary-button {
+  background-color: var(--normal-layout-box-bg-color);
+  transition: all 0.2s ease;
+  border-radius: 10px;
+  border: none;
+  color: var(--normal-layout-text-secondary-color);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--normal-layout-box-bg-invert-color);
+    color: var(--normal-layout-text-secondary-invert-color);
   }
 }

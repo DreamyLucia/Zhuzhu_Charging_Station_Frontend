@@ -1,7 +1,7 @@
 import { getAllStationApi } from "@/api/station";
 
 export default {
-  productName: '猪猪充电站',
+  productName: '猪猪电力',
   message: {
     error: {
       usernameEmpty: '用户名不能为空',

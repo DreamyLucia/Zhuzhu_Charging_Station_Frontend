@@ -161,6 +161,19 @@
   }
 }
 
+.no-bg-button {
+  transition: all 0.2s ease;
+  border-radius: 10px;
+  border: none;
+  background-color: transparent;
+  color: var(--normal-layout-text-color);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--normal-layout-bg-appear-color);
+  }
+}
+
 .normal-button {
   background-color: var(--normal-layout-body-bg-invert-color);
   transition: all 0.2s ease;
@@ -186,5 +199,12 @@
   &:hover {
     background-color: var(--normal-layout-box-bg-invert-color);
     color: var(--normal-layout-text-secondary-invert-color);
+  }
+}
+
+.active-icon {
+  transition: all 0.2s ease;
+  &:hover {
+    color: var(--primary);
   }
 }

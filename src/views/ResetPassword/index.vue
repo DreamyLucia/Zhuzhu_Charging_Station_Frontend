@@ -22,23 +22,23 @@ const gotoSignIn = () => {
 
 const handleReset = async () => {
   if (!username.value) {
-    message.error('用户名不能为空');
+    message.error(t('message.error.usernameEmpty'));
     return;
   }
   if (!password.value) {
-    message.error('密码不能为空');
+    message.error(t('message.error.passwordEmpty'));
     return;
   }
   if (!recheckPassword.value) {
-    message.error('请再次确认密码');
+    message.error(t('message.error.recheckPasswordEmpty'));
     return;
   }
   if (password.value !== recheckPassword.value) {
-    message.error('两次输入的密码不一致');
+    message.error(t('message.error.passwordMismatch'));
     return;
   }
-  await resetApi(username.value, password.value)
-  message.success(t('reset.success'))
+  await resetApi(username.value, password.value);
+  message.success(t('message.success.reset'));
   gotoSignIn();
 };
 </script>

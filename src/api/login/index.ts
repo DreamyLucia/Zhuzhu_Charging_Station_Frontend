@@ -29,7 +29,7 @@ export const registerApi = async (username: string, password: string) => {
       { username, password },
       { headers: { skipToken: true } },
     );
-    const { access_token } = response.data.token;
+    const access_token = response.data.token;
     // 设置Cookie
     Cookies.set('access_token', access_token)
   }

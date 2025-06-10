@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import SingleLayout from '@/layouts/SingleLayout/index.vue';
 import { ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { t } from '@/locales';
 import { registerApi } from '@/api/login';
 import { message } from 'ant-design-vue';
 
 const router = useRouter();
-const route = useRoute();
 
 const username = ref('');
 const password = ref('');
@@ -24,23 +23,24 @@ const gotoSignIn = () => {
 
 const handleSignUp = async () => {
   if (!username.value) {
-    message.error('用户名不能为空');
+    message.error(t('message.error.usernameEmpty'));
     return;
   }
   if (!password.value) {
-    message.error('密码不能为空');
+    message.error(t('message.error.passwordEmpty'));
     return;
   }
   if (!recheckPassword.value) {
-    message.error('请再次确认密码');
+    message.error(t('message.error.recheckPasswordEmpty'));
     return;
   }
   if (password.value !== recheckPassword.value) {
-    message.error('两次输入的密码不一致');
+    message.error(t('message.error.passwordMismatch'));
     return;
   }
-  await registerApi(username.value, password.value)
-  message.success(t('signup.success'))
+  await registerApi(username.value, password.value);
+  message.success(t('message.success.signUp'));
+  router.push({ name: 'Home' });
 };
 </script>
 

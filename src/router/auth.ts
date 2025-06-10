@@ -1,4 +1,4 @@
-const authRoutes = [
+const authRouters = [
   {
     path: '/reset-password',
     name: 'ResetPassword',
@@ -16,4 +16,4 @@ const authRoutes = [
   },
 ];
 
-export default authRoutes;
+export default authRouters;

@@ -41,7 +41,6 @@ const formatNumber = computed(() => {
   background-color: var(--normal-layout-body-bg-color);
   transition: all 0.2s ease;
   border: none;
-  cursor: pointer;
 
   &:hover {
     background-color: var(--normal-layout-bg-appear-color);

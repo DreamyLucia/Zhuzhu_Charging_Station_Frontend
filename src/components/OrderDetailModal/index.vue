@@ -3,7 +3,7 @@ import type { OrderType } from '@/types/order';
 import type { OrderDetailModalProps } from '@/types/orderDetailModalType'
 import { OrderStatus } from '@/constants/order'
 import { StationMode } from '@/constants/station'
-import { onUnmounted, ref, watch } from 'vue';
+import { onUnmounted, ref } from 'vue';
 import Cookies from 'js-cookie';
 import { message } from 'ant-design-vue'
 import LoadingWrapper from '@/components/LoadingWrapper/index.vue'
@@ -11,7 +11,7 @@ import { t } from '@/locales';
 import { displayValue } from '@/utils/display'
 import { formatDate } from '@/utils/formatDate'
 
-const emit = defineEmits(['reload']);
+const emit = defineEmits(['close']);
 
 const modalOpen = ref(false)
 const ws = ref<WebSocket | null>(null)
@@ -115,7 +115,7 @@ const calculateProgress = (numerator: number, denominator: number) => {
 
 const handleClose = () => {
   modalOpen.value = false
-  emit('reload')
+  emit('close')
 }
 
 // 暴露打开方法
@@ -136,14 +136,13 @@ onUnmounted(() => {
 <template>
   <a-modal
     v-model:open="modalOpen"
-    title="订单详情"
-    class="modal-bg"
+    :title="t('order.title')"
     @cancel="handleClose"
   >
     <LoadingWrapper :loading="isLoading" class="flex flex-col w-full h-full space-y-2">
       <div class="flex w-full">
         <span class="text-primary">{{ t('order.id') }} :
-          <span class="text-secondary">{{ orderDetail?.id }}</span>
+          <span class="primary">{{ orderDetail?.id }}</span>
         </span>
         <span class="text-primary ml-auto">
           {{
@@ -155,12 +154,12 @@ onUnmounted(() => {
       </div>
       <div class="flex w-full">
         <span class="text-primary">{{ t('order.stationId') }} :
-          <span class="text-secondary">{{ orderDetail?.chargingStationId }}</span>
+          <span class="primary">{{ orderDetail?.chargingStationId }}</span>
         </span>
       </div>
       <div class="flex w-full">
         <span class="text-primary">{{ t('order.mode') }} :
-          <span class="text-secondary">
+          <span class="primary">
             {{
               orderDetail && orderDetail.mode !== undefined && StationMode[orderDetail.mode]
                 ? StationMode[orderDetail.mode].label
@@ -178,35 +177,35 @@ onUnmounted(() => {
       <div v-if="orderDetail?.status === 0 || orderDetail?.status === 1" class="flex flex-col w-full space-y-2">
         <div class="flex w-full justify-between">
           <span class="text-primary">{{ t('order.chargeDuration') }} :
-            <span class="text-secondary">{{ displayValue(orderDetail?.chargeDuration) }} {{ t('unit.time') }}</span>
+            <span class="primary">{{ displayValue(orderDetail?.chargeDuration) }} {{ t('unit.time') }}</span>
           </span>
           <span class="text-primary">{{ t('order.actualCharge') }} / {{ t('order.chargeAmount') }} :
-            <span class="text-secondary">{{ displayValue(orderDetail?.actualCharge) }} {{ t('unit.degree') }} / {{ orderDetail?.chargeAmount }} {{ t('unit.degree') }}</span>
+            <span class="primary">{{ displayValue(orderDetail?.actualCharge) }} {{ t('unit.degree') }} / {{ orderDetail?.chargeAmount }} {{ t('unit.degree') }}</span>
           </span>
         </div>
         <div class="flex w-full">
           <span class="text-primary">{{ t('order.startTime') }} :
-            <span class="text-secondary">{{ formatDate(displayValue(orderDetail?.startTime)) }}</span>
+            <span class="primary">{{ formatDate(displayValue(orderDetail?.startTime)) }}</span>
           </span>
         </div>
         <div class="flex w-full">
           <span class="text-primary">{{ t('order.stopTime') }} :
-            <span class="text-secondary">{{ formatDate(displayValue(orderDetail?.stopTime)) }}</span>
+            <span class="primary">{{ formatDate(displayValue(orderDetail?.stopTime)) }}</span>
           </span>
         </div>
         <div class="flex flex-col space-y-2 justify-between">
           <span class="text-primary">{{ t('order.chargeFee') }} :
-            <span class="text-secondary">{{ displayValue(orderDetail?.chargeFee) }} {{ t('unit.currency') }}</span>
+            <span class="primary">{{ displayValue(orderDetail?.chargeFee) }} {{ t('unit.currency') }}</span>
           </span>
         </div>
         <div class="flex w-full">
           <span class="text-primary">{{ t('order.serviceFee') }} :
-            <span class="text-secondary">{{ displayValue(orderDetail?.serviceFee) }} {{ t('unit.currency') }}</span>
+            <span class="primary">{{ displayValue(orderDetail?.serviceFee) }} {{ t('unit.currency') }}</span>
           </span>
         </div>
         <div class="flex w-full">
           <span class="text-primary">{{ t('order.totalFee') }} :
-            <span class="text-secondary">{{ displayValue(orderDetail?.totalFee) }} {{ t('unit.currency') }}</span>
+            <span class="primary">{{ displayValue(orderDetail?.totalFee) }} {{ t('unit.currency') }}</span>
           </span>
         </div>
       </div>

@@ -14,6 +14,8 @@ const mode = ref<number>(0)
 const chargeAmount = ref<number>(0)
 
 const handleClose = () => {
+  mode.value = 0
+  chargeAmount.value = 0
   modalOpen.value = false
 }
 
@@ -27,6 +29,9 @@ const handleConfirm = () => {
     mode: mode.value,
     chargeAmount: chargeAmount.value,
   })
+
+  mode.value = 0
+  chargeAmount.value = 0
 
   modalOpen.value = false
 }
@@ -43,7 +48,6 @@ defineExpose({ open })
   <a-modal
     v-model:open="modalOpen"
     title="创建订单"
-    class="modal-bg"
     @cancel="handleClose"
   >
     <div class="flex flex-col">

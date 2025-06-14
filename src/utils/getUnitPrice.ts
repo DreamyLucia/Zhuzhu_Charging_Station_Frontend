@@ -6,7 +6,6 @@ export function getUnitPrice(station: StationType): number {
 
   // 获取当前时间的小时和分钟
   const hours = queriedDate.getHours();
-  const minutes = queriedDate.getMinutes();
 
   // 定义峰时、谷时和平常时段
   const isPeak

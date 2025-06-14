@@ -3,13 +3,11 @@ const dashboardRouters = [
     path: '/',
     name: 'Dashboard',
     component: () => import('@/views/Dashboard/index.vue'),
-    meta: { needStations: true },
     children: [
       {
         path: '',
         name: 'Home',
         component: () => import('@/components/Station/index.vue'),
-        meta: { needStations: true },
       },
       {
         path: 'orders',

@@ -82,8 +82,11 @@ export default {
     queriedAt: '查询时间',
   },
   stationCard: {
+    id: '充电桩ID',
     power: '功率',
+    feetitle: '价格',
     serviceFee: '服务费',
+    modeTitle: '充电模式',
     mode: {
       slow: '慢充',
       fast: '快充',
@@ -100,7 +103,25 @@ export default {
       normal: '平时电价',
       valley: '谷时电价',
       now: '此时单位电价',
-      tips: '（各时段不同）',
+      tips: '此时',
+    },
+    slot: {
+      title: '实时状态信息',
+      currentChargeCount: '系统启动后的累计充电次数',
+      currentChargeTime: '系统启动后的累计充电总时长',
+      currentChargeAmount: '系统启动后的累计充电量',
+    },
+    report: {
+      title: '报表数据',
+      totalChargeCount: '累计充电次数',
+      totalChargeTime: '累计充电时长',
+      totalChargeAmount: '累计充电量',
+      totalChargeFee: '累计充电费用',
+      totalServiceFee: '累计服务费用',
+      totalFee: '累计总费用',
+    },
+    button: {
+      close: '关闭',
     },
   },
   ordersContainer: {
@@ -111,6 +132,7 @@ export default {
     queriedAt: '查询时间',
   },
   order: {
+    title: '订单详情',
     status: {
       completed: "已完成",
       inProgress: "进行中",

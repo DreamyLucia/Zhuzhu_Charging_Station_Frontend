@@ -2,7 +2,7 @@
 import {
   LoadingOutlined,
 } from '@ant-design/icons-vue'
-const props = defineProps<{
+defineProps<{
   loading: boolean
 }>()
 </script>

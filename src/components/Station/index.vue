@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import type { StationType } from '@/types/station';
+import type { OrderDetailModalProps } from '@/types/orderDetailModalType'
 import Card from './components/Card.vue';
 import {
   PlusCircleOutlined,
@@ -10,9 +11,15 @@ import { t } from '@/locales';
 import { message } from 'ant-design-vue'
 import LoadingWrapper from '@/components/LoadingWrapper/index.vue'
 import { getAllStationApi } from '@/api/station';
+import OrderDetailModal from '@/components/OrderDetailModal/index.vue'
+import OrderCreateModal from '@/components/OrderCreateModal/index.vue'
 
 const stations = ref<StationType[]>([])
 const isLoading = ref(true)
+
+const detailModalRef = ref<InstanceType<typeof OrderDetailModal> | null>(null)
+const createModalRef = ref<InstanceType<typeof OrderCreateModal> | null>(null)
+
 let queriedAt = new Date()
 
 const fetchAllStationInfo = async () => {
@@ -36,11 +43,18 @@ const getCurrentTime = (now: Date) => {
   return `${hours}:${minutes}:${seconds}`; // 返回格式化的时间字符串
 }
 
+const handleCreate = (payload: OrderDetailModalProps) => {
+  detailModalRef.value?.open({
+    mode: payload.mode,
+    chargeAmount: payload.chargeAmount,
+  })
+}
+
 const buttons = [
   {
     icon: PlusCircleOutlined,
     title: t('stationContainer.button.add'),
-    action: () => message.success(t('message.success.chargePanel')),
+    action: () => createModalRef.value?.open(),
   },
   {
     icon: ReloadOutlined,
@@ -55,10 +69,12 @@ onMounted(() => {
 </script>
 
 <template>
+  <OrderDetailModal ref="detailModalRef" @close="fetchAllStationInfo" />
+  <OrderCreateModal ref="createModalRef" @create="handleCreate" />
   <LoadingWrapper :loading="isLoading" class="w-full h-full">
     <div class="flex flex-col w-full h-full items-center body-bg rounded-[10px]">
       <div class="flex flex-col flex-1 w-full border-bottom px-4 py-4">
-        <div class="grid grid-cols-3 gap-8 w-full">
+        <div :key="queriedAt.toISOString()" class="grid grid-cols-3 gap-8 w-full">
           <Card
             v-for="item in stations"
             :key="item.id"

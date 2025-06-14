@@ -10,8 +10,8 @@ import { t } from '@/locales';
 import { message } from 'ant-design-vue'
 import { getOrdersApi } from '@/api/order'
 import LoadingWrapper from '@/components/LoadingWrapper/index.vue'
-import OrderDetailModal from '@/components//OrderDetailModal/index.vue'
-import OrderCreateModal from '@/components//OrderCreateModal/index.vue'
+import OrderDetailModal from '@/components/OrderDetailModal/index.vue'
+import OrderCreateModal from '@/components/OrderCreateModal/index.vue'
 import { formatDate } from '@/utils/formatDate'
 import { displayValue } from '@/utils/display'
 import { StationMode } from '@/constants/station'
@@ -51,16 +51,16 @@ const getCurrentTime = (now: Date) => {
 }
 
 const columns = [
-  { title: '详单编号', dataIndex: 'id', key: 'id', align: 'center', customRender: ({ text }: { text: string }) => displayValue(text), width: 180, ellipsis: true },
-  { title: '生成时间', dataIndex: 'recordTime', key: 'recordTime', align: 'center', customRender: ({ text }: { text: string }) => displayValue(formatDate(text)), width: 230, ellipsis: true },
-  { title: '充电模式', dataIndex: 'mode', key: 'mode', align: 'center', customRender: ({ text }: { text: string }) => StationMode[parseInt(displayValue(text))].label },
-  { title: '计划充电量（度）', dataIndex: 'chargeAmount', key: 'chargeAmount', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text), width: 180, ellipsis: true },
-  { title: '已充电量（度）', dataIndex: 'actualCharge', key: 'actualCharge', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text), width: 150, ellipsis: true },
-  { title: '订单状态', dataIndex: 'status', key: 'status', align: 'center', customRender: ({ text }: { text: string }) => OrderStatus[parseInt(displayValue(text))].label },
-  { title: '充电时长（秒）', dataIndex: 'chargeDuration', key: 'chargeDuration', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text) },
-  { title: '充电费用（元）', dataIndex: 'chargeFee', key: 'chargeFee', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text) },
-  { title: '服务费用（元）', dataIndex: 'serviceFee', key: 'serviceFee', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text) },
-  { title: '总费用（元）', dataIndex: 'totalFee', key: 'totalFee', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text) },
+  { title: t('order.id'), dataIndex: 'id', key: 'id', align: 'center', customRender: ({ text }: { text: string }) => displayValue(text), width: 180, ellipsis: true },
+  { title: t('order.recordTime'), dataIndex: 'recordTime', key: 'recordTime', align: 'center', customRender: ({ text }: { text: string }) => displayValue(formatDate(text)), width: 230, ellipsis: true },
+  { title: t('order.mode'), dataIndex: 'mode', key: 'mode', align: 'center', customRender: ({ text }: { text: string }) => StationMode[parseInt(displayValue(text))].label },
+  { title: `${t('order.chargeAmount')} (${t('unit.degree')})`, dataIndex: 'chargeAmount', key: 'chargeAmount', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text), width: 180, ellipsis: true },
+  { title: `${t('order.actualCharge')} (${t('unit.degree')})`, dataIndex: 'actualCharge', key: 'actualCharge', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text), width: 150, ellipsis: true },
+  { title: t('order.statusTitle'), dataIndex: 'status', key: 'status', align: 'center', customRender: ({ text }: { text: string }) => OrderStatus[parseInt(displayValue(text))].label },
+  { title: `${t('order.chargeDuration')} (${t('unit.time')})`, dataIndex: 'chargeDuration', key: 'chargeDuration', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text) },
+  { title: `${t('order.chargeFee')} (${t('unit.currency')})`, dataIndex: 'chargeFee', key: 'chargeFee', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text) },
+  { title: `${t('order.serviceFee')} (${t('unit.currency')})`, dataIndex: 'serviceFee', key: 'serviceFee', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text) },
+  { title: `${t('order.totalFee')} (${t('unit.currency')})`, dataIndex: 'totalFee', key: 'totalFee', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text) },
 ]
 
 const handleRowClick = (record: OrderDetailModalProps) => {
@@ -100,7 +100,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <OrderDetailModal ref="detailModalRef" @reload="fetchOrders" />
+  <OrderDetailModal ref="detailModalRef" @close="fetchOrders" />
   <OrderCreateModal ref="createModalRef" @create="handleCreate" />
   <LoadingWrapper :loading="isLoading" class="w-full h-full">
     <div class="flex flex-col w-full h-full items-center body-bg rounded-[10px]">

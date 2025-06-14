@@ -11,6 +11,7 @@ import { message } from 'ant-design-vue'
 import { getOrdersApi } from '@/api/order'
 import LoadingWrapper from '@/components/LoadingWrapper/index.vue'
 import OrderDetailModal from '@/components//OrderDetailModal/index.vue'
+import OrderCreateModal from '@/components//OrderCreateModal/index.vue'
 import { formatDate } from '@/utils/formatDate'
 import { displayValue } from '@/utils/display'
 import { StationMode } from '@/constants/station'
@@ -19,6 +20,7 @@ import { OrderStatus } from '@/constants/order'
 const orders = ref<OrderType[]>([])
 const isLoading = ref(true)
 const detailModalRef = ref<InstanceType<typeof OrderDetailModal> | null>(null)
+const createModalRef = ref<InstanceType<typeof OrderCreateModal> | null>(null)
 
 let queriedAt = new Date()
 
@@ -72,11 +74,18 @@ const customRow = (record: OrderDetailModalProps) => {
   }
 }
 
+const handleCreate = (payload: OrderDetailModalProps) => {
+  detailModalRef.value?.open({
+    mode: payload.mode,
+    chargeAmount: payload.chargeAmount,
+  })
+}
+
 const buttons = [
   {
     icon: PlusCircleOutlined,
     title: t('stationContainer.button.add'),
-    action: () => message.success(t('message.success.chargePanel')),
+    action: () => createModalRef.value?.open(),
   },
   {
     icon: ReloadOutlined,
@@ -92,6 +101,7 @@ onMounted(() => {
 
 <template>
   <OrderDetailModal ref="detailModalRef" @reload="fetchOrders" />
+  <OrderCreateModal ref="createModalRef" @create="handleCreate" />
   <LoadingWrapper :loading="isLoading" class="w-full h-full">
     <div class="flex flex-col w-full h-full items-center body-bg rounded-[10px]">
       <!-- 订单表格区域 -->

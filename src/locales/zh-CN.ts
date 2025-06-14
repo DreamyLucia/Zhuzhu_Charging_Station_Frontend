@@ -7,6 +7,7 @@ export default {
       usernameEmpty: '用户名不能为空',
       passwordEmpty: '密码不能为空',
       recheckPasswordEmpty: '请再次确认密码',
+      inalidChargeAmount: '请输入合法充电量',
       passwordMismatch: '两次输入的密码不一致',
       getUserInfoError: '获取用户信息失败',
       getAllStationError: '获取充电桩信息失败',
@@ -135,6 +136,7 @@ export default {
       cancel: '取消充电',
       finish: '结束充电',
       close: '关闭',
+      confirm: '提交',
     },
   },
 }

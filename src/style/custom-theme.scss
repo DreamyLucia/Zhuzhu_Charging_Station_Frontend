@@ -26,6 +26,14 @@
   background-color: var(--normal-layout-box-bg-invert-color);
 }
 
+.modal-bg .ant-modal-content {
+  background-color: var(--normal-layout-box-bg-color) !important;
+}
+
+.modal-bg .ant-modal-title {
+  background-color: var(--normal-layout-box-bg-color) !important;
+}
+
 /* 文本颜色 */
 .text-primary {
   transition: all 0.2s ease;
@@ -171,6 +179,20 @@
 
   &:hover {
     background-color: var(--normal-layout-bg-appear-color);
+  }
+}
+
+.border-button {
+  transition: all 0.2s ease;
+  border-radius: 10px;
+  border: solid 1px var(--normal-layout-border-color);
+  color: var(--normal-layout-text-color);
+  background: transparent;
+  cursor: pointer;
+
+  &:hover {
+    border: solid 1px var(--primary);
+    color: var(--primary);
   }
 }
 

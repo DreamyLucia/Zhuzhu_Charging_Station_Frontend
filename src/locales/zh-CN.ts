@@ -78,6 +78,7 @@ export default {
       add: '新建订单',
       reload: '刷新列表',
     },
+    queriedAt: '查询时间',
   },
   stationCard: {
     power: '功率',
@@ -93,10 +94,20 @@ export default {
       error: '故障',
     },
     price: {
+      title: '单位电价',
       peak: '峰时电价',
       normal: '平时电价',
       valley: '谷时电价',
+      now: '此时单位电价',
+      tips: '（各时段不同）',
     },
+  },
+  ordersContainer: {
+    button: {
+      add: '新建订单',
+      reload: '刷新列表',
+    },
+    queriedAt: '查询时间',
   },
   order: {
     status: {
@@ -105,6 +116,25 @@ export default {
       queued: "排队中",
       waiting: "等待中",
       cancelled: "已取消",
+    },
+    id: '订单ID',
+    stationId: '充电桩ID',
+    userId: '充电用户ID',
+    mode: '充电模式',
+    recordTime: '详单生成时间',
+    statusTitle: '订单状态',
+    chargeAmount: '计划充电量',
+    actualCharge: '已充电量',
+    chargeDuration: '充电时长',
+    startTime: '启动时间',
+    stopTime: '停止时间',
+    chargeFee: '充电费用',
+    serviceFee: '服务费用',
+    totalFee: '总费用',
+    button: {
+      cancel: '取消充电',
+      finish: '结束充电',
+      close: '关闭',
     },
   },
 }

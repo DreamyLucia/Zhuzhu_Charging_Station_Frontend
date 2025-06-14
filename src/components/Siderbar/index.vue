@@ -13,10 +13,12 @@ import {
 } from '@ant-design/icons-vue';
 import DigitalDisplay from '@/components/DigitalDisplay/index.vue';
 import { useRouter } from 'vue-router';
+import { useAppStore } from '@/store/app';
 
 const props = defineProps<{ user: UserType }>()
 const router = useRouter();
 const isAdmin = props.user.roles.includes('ROLE_ADMIN')
+const appStore = useAppStore()
 
 const buttons = [
   {
@@ -76,6 +78,10 @@ const digitalList = [
   },
 ]
 
+const toggleTheme = () => {
+  appStore.setDarkMode(!appStore.isDarkMode)
+}
+
 const handlelogout = async () => {
   await logoutApi()
   message.success(t('message.success.logout'))
@@ -127,7 +133,17 @@ const handlelogout = async () => {
           </div>
           <span class="text-xl font-bold ml-2 text-primary text-ellipsis-single-line">{{ props.user.username }}</span>
         </div>
-        <div class="flex h-full px-2 ml-auto items-center justify-center logout-area" @click="handlelogout">
+        <svg width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="theme-toggle ml-auto" @click="toggleTheme">
+          <g clip-path="url(#clip0_86_308)">
+            <path d="M8.00033 0.666748V2.00008M8.00033 14.0001V15.3334M2.81366 2.81341L3.76033 3.76008M12.2403 12.2401L13.187 13.1867M0.666992 8.00008H2.00033M14.0003 8.00008H15.3337M2.81366 13.1867L3.76033 12.2401M12.2403 3.76008L13.187 2.81341M11.3337 8.00008C11.3337 9.84103 9.84127 11.3334 8.00033 11.3334C6.15938 11.3334 4.66699 9.84103 4.66699 8.00008C4.66699 6.15913 6.15938 4.66675 8.00033 4.66675C9.84127 4.66675 11.3337 6.15913 11.3337 8.00008Z" stroke="var(--normal-layout-text-secondary-color)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </g>
+          <defs>
+            <clipPath id="clip0_86_308">
+              <rect width="16" height="16" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+        <div class="flex h-full px-2 ml-2 items-center justify-center logout-area" @click="handlelogout">
           <LogoutOutlined class="text-xl text-red-500 logout-icon" />
         </div>
       </div>
@@ -149,6 +165,15 @@ const handlelogout = async () => {
       scale: 1.2;
       font-weight: bold;
     }
+  }
+}
+
+.theme-toggle {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
   }
 }
 </style>

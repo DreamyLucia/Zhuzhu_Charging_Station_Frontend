@@ -52,6 +52,7 @@ const getCurrentTime = (now: Date) => {
 
 const columns = [
   { title: t('order.id'), dataIndex: 'id', key: 'id', align: 'center', customRender: ({ text }: { text: string }) => displayValue(text), width: 180, ellipsis: true },
+  { title: '用户ID', dataIndex: 'userId', key: 'userId', align: 'center', customRender: ({ text }: { text: string }) => displayValue(text) },
   { title: t('order.recordTime'), dataIndex: 'recordTime', key: 'recordTime', align: 'center', customRender: ({ text }: { text: string }) => displayValue(formatDate(text)), width: 230, ellipsis: true },
   { title: t('order.mode'), dataIndex: 'mode', key: 'mode', align: 'center', customRender: ({ text }: { text: string }) => StationMode[parseInt(displayValue(text))].label },
   { title: `${t('order.chargeAmount')} (${t('unit.degree')})`, dataIndex: 'chargeAmount', key: 'chargeAmount', align: 'center', customRender: ({ text }: { text: number }) => displayValue(text), width: 180, ellipsis: true },

@@ -36,3 +36,16 @@ export interface StationType {
   slot: StationSlot
   report: StationReport
 }
+
+export interface StationUpsertPayload {
+  id?: number
+  name: string
+  description: string
+  mode: number
+  power: number
+  serviceFee: number
+  peakPrice: number
+  normalPrice: number
+  valleyPrice: number
+  maxQueueLength: number
+}

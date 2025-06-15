@@ -11,16 +11,14 @@ const props = defineProps<{
  * 格式化数字，大于等于 1万 显示为 xx.xx w，否则原样返回
  */
 const formatNumber = computed(() => {
-  if (props.number >= 10000) {
-    // 保留两位小数
-    let val = (props.number / 10000).toFixed(2);
-    // 去掉多余的小数点0
-    val = val.replace(/\.00$/, '').replace(/(\.\d)0$/, '$1');
-    return `${val}w`;
-  }
-  else {
-    return props.number.toString();
-  }
+  let val = props.number.toFixed(2); // 保留两位小数
+  // 去掉多余的小数点0
+  val = val.replace(/\.00$/, '').replace(/(\.\d)0$/, '$1');
+
+  if (props.number >= 10000)
+    return `${(props.number / 10000).toFixed(2).replace(/\.00$/, '').replace(/(\.\d)0$/, '$1')}w`;
+  else
+    return val;
 })
 </script>
 

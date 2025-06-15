@@ -14,24 +14,11 @@ const dashboardRouters = [
         name: 'OrdersPage',
         component: () => import('@/components/Orders/index.vue'),
       },
-      /*
-        {
-          path: 'order-detail',
-          name: 'OrderDetail',
-          component: () => import('@/components/MainApp/OrderDetail/index.vue'),
-          meta: {
-            showHome: false,
-          },
-        },
-        {
-          path: 'setting',
-          name: 'Setting',
-          component: () => import('@/components/Setting/index.vue'),
-          meta: {
-            showHome: false,
-          },
-        },
-        */
+      {
+        path: 'manage',
+        name: 'ManagePage',
+        component: () => import('@/components/Manage/index.vue'),
+      },
     ],
   },
 ];

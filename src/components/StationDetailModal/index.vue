@@ -78,14 +78,14 @@ defineExpose({ open })
           </span>
         </span>
         <span class="text-primary">{{ t('stationCard.power') }} :
-          <span class="primary">{{ station?.power }}</span>
+          <span class="primary">{{ station?.power }} {{ t('unit.degree') }}/{{ t('unit.time') }}</span>
         </span>
       </div>
 
       <div class="flex w-full space-x-2">
         <div class="flex flex-1 flex-col space-y-4">
           <div class="flex flex-col w-full space-y-2">
-            <span class="text-primary text-2xl">{{ t('stationCard.feetitle') }}</span>
+            <span class="primary text-2xl">{{ t('stationCard.feetitle') }}</span>
             <span class="text-primary">{{ t('stationCard.serviceFee') }} :
               <span class="primary">{{ station?.serviceFee }} {{ t('unit.currency') }}/{{ t('unit.degree') }}</span>
             </span>
@@ -106,6 +106,7 @@ defineExpose({ open })
               <span class="primary">{{ station?.valleyPrice }} {{ t('unit.currency') }}/{{ t('unit.degree') }}</span>
             </span>
           </div>
+          <!--
           <div class="flex flex-col w-full space-y-2">
             <span class="text-primary text-2xl">{{ t('stationCard.slot.title') }}</span>
             <span class="text-primary">{{ t('stationCard.slot.currentChargeCount') }} :
@@ -118,9 +119,10 @@ defineExpose({ open })
               <span class="primary">{{ station?.slot.status.currentChargeAmount }} {{ t('unit.degree') }}</span>
             </span>
           </div>
+          -->
         </div>
         <div class="flex flex-1 flex-col space-y-2">
-          <span class="text-primary text-2xl">{{ t('stationCard.report.title') }}
+          <span class="primary text-2xl">{{ t('stationCard.report.title') }}
             <span class="text-secondary text-sm ml-2">
               {{ station?.queriedAt ? formatDate(station.queriedAt) : '-' }}
             </span>

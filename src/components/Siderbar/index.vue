@@ -1,24 +1,64 @@
 <script setup lang="ts">
+import { computed, onMounted, ref } from 'vue'
 import { t } from '@/locales';
 import { getUserInfoApi } from '@/api/user';
 import { logoutApi } from '@/api/login';
 import type { UserType } from '@/types/user';
+import type { OrderType } from '@/types/order';
 import { message } from 'ant-design-vue'
 import {
   AppstoreOutlined,
   InfoCircleOutlined,
   LogoutOutlined,
-  SettingOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons-vue';
 import DigitalDisplay from '@/components/DigitalDisplay/index.vue';
 import { useRouter } from 'vue-router';
 import { useAppStore } from '@/store/app';
+import { getOrdersApi } from '@/api/order'
 
 const props = defineProps<{ user: UserType }>()
 const router = useRouter();
 const isAdmin = props.user.roles.includes('ROLE_ADMIN')
 const appStore = useAppStore()
+const orders = ref<OrderType[]>([])
+
+// 计算统计数据的计算属性
+const totalChargeDuration = computed(() =>
+  orders.value.reduce((acc: number, order: OrderType) => acc + (order.chargeDuration || 0), 0),
+)
+
+const totalChargeCount = computed(() => orders.value.length)
+
+const totalChargeFee = computed(() =>
+  orders.value.reduce((acc: number, order: OrderType) => acc + (order.chargeFee || 0), 0),
+)
+
+const totalServiceFee = computed(() =>
+  orders.value.reduce((acc: number, order: OrderType) => acc + (order.serviceFee || 0), 0),
+)
+
+const totalChargeAmount = computed(() =>
+  orders.value.reduce((acc: number, order: OrderType) => acc + (order.actualCharge || 0), 0),
+)
+
+const totalFee = computed(() =>
+  orders.value.reduce((acc: number, order: OrderType) => acc + (order.totalFee || 0), 0),
+)
+
+const fetchOrders = async () => {
+  try {
+    const result = await getOrdersApi()
+    // 按 recordTime 降序排序（大的/晚的在前）
+    orders.value = result.sort(
+      (a: OrderType, b: OrderType) => new Date(b.recordTime).getTime() - new Date(a.recordTime).getTime(),
+    )
+  }
+  catch (error) {
+    message.error(t('message.error.getOrderError'))
+    console.error('获取订单信息失败:', error)
+  }
+}
 
 const buttons = [
   {
@@ -35,48 +75,43 @@ const buttons = [
     ? {
         icon: InfoCircleOutlined,
         title: t('dashboardSiderbar.button.adminPanel'),
-        action: () => message.success(t('message.success.adminPanel')),
+        action: () => router.push({ name: 'ManagePage' }),
       }
     : null,
-  {
-    icon: SettingOutlined,
-    title: t('dashboardSiderbar.button.settings'),
-    action: () => message.success(t('message.success.settings')),
-  },
 ].filter(Boolean); // 过滤掉 null
 
-const digitalList = [
+const digitalList = computed(() => [
   {
     title: t('dashboardSiderbar.digitalTitle.totalDuration'),
-    number: props.user.totalChargeDuration,
+    number: totalChargeDuration.value,
     unit: t('unit.time'),
   },
   {
     title: t('dashboardSiderbar.digitalTitle.totalCount'),
-    number: props.user.totalChargeCount,
+    number: totalChargeCount.value,
     unit: t('unit.times'),
   },
   {
     title: t('dashboardSiderbar.digitalTitle.totalFee'),
-    number: props.user.totalChargeFee,
+    number: totalChargeFee.value,
     unit: t('unit.currency'),
   },
   {
     title: t('dashboardSiderbar.digitalTitle.totalServiceFee'),
-    number: props.user.totalServiceFee,
+    number: totalServiceFee.value,
     unit: t('unit.currency'),
   },
   {
     title: t('dashboardSiderbar.digitalTitle.totalAmount'),
-    number: props.user.totalChargeAmount,
+    number: totalChargeAmount.value,
     unit: t('unit.degree'),
   },
   {
     title: t('dashboardSiderbar.digitalTitle.totalCost'),
-    number: props.user.totalFee,
+    number: totalFee.value,
     unit: t('unit.currency'),
   },
-]
+])
 
 const toggleTheme = () => {
   appStore.setDarkMode(!appStore.isDarkMode)
@@ -86,6 +121,10 @@ const handlelogout = async () => {
   await logoutApi()
   message.success(t('message.success.logout'))
 }
+
+onMounted(() => {
+  fetchOrders()
+})
 </script>
 
 <template>

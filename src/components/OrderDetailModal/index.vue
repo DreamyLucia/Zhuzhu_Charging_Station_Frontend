@@ -115,6 +115,7 @@ const calculateProgress = (numerator: number, denominator: number) => {
 
 const handleClose = () => {
   modalOpen.value = false
+  closeWS()
   emit('close')
 }
 
@@ -165,6 +166,13 @@ onUnmounted(() => {
                 ? StationMode[orderDetail.mode].label
                 : ''
             }}
+          </span>
+        </span>
+      </div>
+      <div class="flex w-full">
+        <span class="text-primary">排队号 :
+          <span class="primary">
+            {{ orderDetail?.queueNo }}
           </span>
         </span>
       </div>

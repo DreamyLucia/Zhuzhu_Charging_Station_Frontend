@@ -53,7 +53,7 @@ const handleClick = () => {
       </div>
     </div>
     <div class="flex items-center w-full">
-      <div class="flex items-center space-x-8 text-sm">
+      <div class="flex items-center space-x-4 text-sm">
         <div class="flex space-x-2 items-center">
           <span class="text-primary">{{ t('stationCard.power') }}</span>
           <span class="primary">{{ station.power }} {{ t('unit.degree') }}/{{ t('unit.time') }}</span>
@@ -68,9 +68,9 @@ const handleClick = () => {
             <span class="primary">{{ getUnitPrice(station) }} {{ t('unit.currency') }}/{{ t('unit.degree') }}</span>
           </div>
         </div>
-        <div class="ml-auto active-icon cursor-pointer text-secondary" @click="handleClick">
-          <QuestionCircleOutlined />
-        </div>
+      </div>
+      <div class="ml-auto active-icon cursor-pointer text-secondary" @click="handleClick">
+        <QuestionCircleOutlined />
       </div>
     </div>
   </div>

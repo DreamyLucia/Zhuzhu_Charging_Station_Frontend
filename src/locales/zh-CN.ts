@@ -1,5 +1,3 @@
-import { getAllStationApi } from "@/api/station";
-
 export default {
   productName: '猪猪电力',
   message: {
@@ -198,7 +196,6 @@ export default {
       normalPrice: '平时电价',
       valleyPrice: '谷时电价',
       maxQueueLength: '最大排队数',
-
     },
   },
 }
